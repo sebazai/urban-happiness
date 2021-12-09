@@ -47,8 +47,11 @@ fn main() {
     }
 
     // Find the winner
+    // let mut asd = solved_bingo_boards.clone().into_iter().map(|f| f.solved_at_index).collect::<Vec<i32>>();
+    // asd.sort_unstable(); 
+    // println!("{:?}", asd);
     let winner = solved_bingo_boards.into_iter()
-        .min_by(|a,b| a.solved_at_index.partial_cmp(&b.solved_at_index).unwrap_or(Ordering::Less))
+        .max_by(|a,b| a.solved_at_index.partial_cmp(&b.solved_at_index).unwrap_or(Ordering::Greater))
             .expect("No winner found.");
     
     // println!("{:?}", winner);
@@ -81,7 +84,8 @@ fn solve_bingo_board(mut board: Bingo, numbers: &Vec<i32>) -> Bingo {
                 return board;
             }
         }
-    }   
+    }
+    // Not solved ever with given input
     return board;
 }
 
@@ -93,7 +97,6 @@ fn check_if_number_in_board(board: &Vec<Vec<i32>>, number: &i32) -> (usize, usiz
             }
         }
     }
-    // Not found, fix bug
     (6, 6)
 }
 
